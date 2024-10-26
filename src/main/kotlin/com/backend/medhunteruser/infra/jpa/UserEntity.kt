@@ -1,8 +1,5 @@
 package com.backend.medhunteruser.infra.jpa
 
-import com.backend.medhunteruser.domain.model.Email
-import com.backend.medhunteruser.domain.model.Name
-import com.backend.medhunteruser.domain.model.Picture
 import com.backend.medhunteruser.domain.model.User
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
@@ -44,9 +41,9 @@ data class UserEntity(
         return User(
             id = id,
             googleId = googleId,
-            name = Name(name),
-            email = Email(email),
-            picture = picture?.let { Picture(it) },
+            name = User.Name(name),
+            email = User.Email(email),
+            picture = picture?.let { User.Picture(it) },
         )
     }
 
