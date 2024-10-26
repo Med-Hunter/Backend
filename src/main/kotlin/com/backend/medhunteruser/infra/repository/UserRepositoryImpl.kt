@@ -2,25 +2,25 @@ package com.backend.medhunteruser.infra.repository
 
 import com.backend.medhunteruser.domain.model.User
 import com.backend.medhunteruser.domain.repository.UserRepository
-import com.backend.medhunteruser.infra.jpa.UserEntity
-import com.backend.medhunteruser.infra.jpa.UserJpaRepository
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties.Restclient
+import com.backend.medhunteruser.infra.mongo.UserEntity
+import com.backend.medhunteruser.infra.mongo.UserMongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserRepositoryImpl (
-    private val userJpaRepository : UserJpaRepository,
-    private val restClient : Restclient
-): UserRepository {
+class UserRepositoryImpl(
+    private val userMongoRepository: UserMongoRepository,
+) : UserRepository {
     override fun save(
         user: User
     ): User {
         val userEntity = UserEntity(
-            googleId = user.googleId,
-            name = user.name.value,
-            email = user.email.value,
-            picture = user.picture?.url
+            name = user.personal.name,
+            email = user.personal.email,
+            provider = user.provider.provider,
+            providerId = user.provider.providerId,
+            refreshToken = user.refreshToken.token,
+            picture = user.personal.picture
         )
-        return userJpaRepository.save(userEntity).toDomain()
+        return userMongoRepository.save(userEntity).toDomain()
     }
 }
