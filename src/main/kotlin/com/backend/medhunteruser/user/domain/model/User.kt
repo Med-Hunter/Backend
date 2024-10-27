@@ -1,4 +1,4 @@
-package com.backend.medhunteruser.domain.model
+package com.backend.medhunteruser.user.domain.model
 
 import java.util.regex.Pattern
 
@@ -6,20 +6,18 @@ class User(
     val id: String? = null,
     var personal: PersonalInfo,
     val provider: ProviderInfo,
+    val role: String,
     val refreshToken: RefreshToken,
-) {
-}
+)
 
 data class RefreshToken(
     val token: String,
-) {
-}
+)
 
 data class ProviderInfo(
     val provider: AuthProvider,
     val providerId: String,
-) {
-}
+)
 
 data class PersonalInfo(
     val name: String,

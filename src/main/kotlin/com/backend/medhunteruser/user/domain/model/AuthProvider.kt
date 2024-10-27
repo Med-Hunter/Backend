@@ -1,4 +1,4 @@
-package com.backend.medhunteruser.domain.model
+package com.backend.medhunteruser.user.domain.model
 
 enum class AuthProvider {
     GOOGLE,

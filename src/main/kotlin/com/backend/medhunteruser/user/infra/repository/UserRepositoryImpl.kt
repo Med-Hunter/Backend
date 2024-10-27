@@ -1,9 +1,9 @@
-package com.backend.medhunteruser.infra.repository
+package com.backend.medhunteruser.user.infra.repository
 
-import com.backend.medhunteruser.domain.model.User
-import com.backend.medhunteruser.domain.repository.UserRepository
-import com.backend.medhunteruser.infra.mongo.UserEntity
-import com.backend.medhunteruser.infra.mongo.UserMongoRepository
+import com.backend.medhunteruser.user.domain.model.User
+import com.backend.medhunteruser.user.domain.repository.UserRepository
+import com.backend.medhunteruser.user.infra.mongo.UserEntity
+import com.backend.medhunteruser.user.infra.mongo.UserMongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -17,6 +17,7 @@ class UserRepositoryImpl(
             name = user.personal.name,
             email = user.personal.email,
             provider = user.provider.provider,
+            role = user.role,
             providerId = user.provider.providerId,
             refreshToken = user.refreshToken.token,
             picture = user.personal.picture

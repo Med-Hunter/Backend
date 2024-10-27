@@ -1,4 +1,4 @@
-package com.backend.medhunteruser.infra.mongo
+package com.backend.medhunteruser.user.infra.mongo
 
 import org.springframework.data.mongodb.repository.MongoRepository
 

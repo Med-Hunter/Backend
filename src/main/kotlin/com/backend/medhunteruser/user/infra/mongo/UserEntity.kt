@@ -1,6 +1,6 @@
-package com.backend.medhunteruser.infra.mongo
+package com.backend.medhunteruser.user.infra.mongo
 
-import com.backend.medhunteruser.domain.model.*
+import com.backend.medhunteruser.user.domain.model.*
 import jakarta.persistence.Id
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -12,6 +12,7 @@ data class UserEntity(
     @Id val id: String? = null,
     val name: String,
     var email: String,
+    val role: UserRole,
     var password: String? = null,
     var picture: String? = null,
     val provider: AuthProvider,
@@ -26,12 +27,14 @@ data class UserEntity(
         provider: AuthProvider,
         providerId: String,
         refreshToken: String,
+        role: String,
         picture: String? = null
     ) : this(
         id = null,
         name = name,
         email = email,
         password = null,
+        role = UserRole.valueOf(role),
         picture = picture,
         provider = provider,
         providerId = providerId,
@@ -39,6 +42,7 @@ data class UserEntity(
         createdAt = null,
         updatedAt = null
     )
+
     fun toDomain(): User {
         return User(
             id = id,
@@ -48,6 +52,7 @@ data class UserEntity(
                 password = password,
                 picture = picture,
             ),
+            role = role.name,
             provider = ProviderInfo(
                 provider = provider,
                 providerId = providerId,
@@ -57,4 +62,9 @@ data class UserEntity(
             )
         )
     }
+}
+
+enum class UserRole {
+    ROLE_USER,
+    ROLE_ADMIN
 }
